@@ -262,7 +262,7 @@ TEST(LockFreeRingBuffer, writeReadDifferentType) {
     }
 
     FixedBuffer& operator=(std::string&& data) {
-      strncpy(data_, data.c_str(), sizeof(data_) - 1);
+      strlcpy(data_, data.c_str(), sizeof(data_) - 1);
 
       return (*this);
     }

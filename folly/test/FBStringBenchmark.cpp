@@ -60,7 +60,7 @@ void randomBinaryString(String* toFill, size_t size = 1000) {
 template <class String, class Integral>
 void Num2String(String& str, Integral n) {
   str.resize(30, '\0');
-  sprintf(&str[0], "%lu", static_cast<unsigned long>(n));
+  snprintf(&str[0], "%lu", static_cast<unsigned long>(n));
   str.resize(strlen(str.c_str()));
 }
 

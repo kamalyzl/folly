@@ -69,7 +69,7 @@ int ElfFile::openNoThrow(
   // check failure above if we leave fd != -1 and the object is recycled
   // like it is inside SignalSafeElfCache
   auto guard = makeGuard([&] { reset(); });
-  strncat(filepath_, name, kFilepathMaxLen - 1);
+  strlcat(filepath_, name, kFilepathMaxLen - 1);
   fd_ = ::open(name, readOnly ? O_RDONLY : O_RDWR);
   if (fd_ == -1) {
     if (msg) {
@@ -161,7 +161,7 @@ ElfFile::ElfFile(ElfFile&& other) noexcept
       length_(other.length_),
       baseAddress_(other.baseAddress_) {
   // copy other.filepath_, leaving filepath_ zero-terminated, always.
-  strncat(filepath_, other.filepath_, kFilepathMaxLen - 1);
+  strlcat(filepath_, other.filepath_, kFilepathMaxLen - 1);
   other.filepath_[0] = 0;
   other.fd_ = -1;
   other.file_ = static_cast<char*>(MAP_FAILED);
@@ -174,7 +174,7 @@ ElfFile& ElfFile::operator=(ElfFile&& other) {
   reset();
 
   // copy other.filepath_, leaving filepath_ zero-terminated, always.
-  strncat(filepath_, other.filepath_, kFilepathMaxLen - 1);
+  strlcat(filepath_, other.filepath_, kFilepathMaxLen - 1);
   fd_ = other.fd_;
   file_ = other.file_;
   length_ = other.length_;

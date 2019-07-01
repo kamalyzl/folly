@@ -292,7 +292,7 @@ char* asctime_r(const tm* tm, char* buf) {
     return nullptr;
   }
   // Nothing we can do if the buff is to small :(
-  return strcpy(buf, tmpBuf);
+  return strlcpy(buf, tmpBuf);
 }
 
 char* ctime_r(const time_t* t, char* buf) {
@@ -301,7 +301,7 @@ char* ctime_r(const time_t* t, char* buf) {
     return nullptr;
   }
   // Nothing we can do if the buff is to small :(
-  return strcpy(buf, tmpBuf);
+  return strlcpy(buf, tmpBuf);
 }
 
 tm* gmtime_r(const time_t* t, tm* res) {

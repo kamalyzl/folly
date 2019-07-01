@@ -39,7 +39,7 @@ char* mkdtemp(char* tn) {
   auto len = strlen(tn);
   int ret = 0;
   do {
-    strcpy(tn + len - 6, "XXXXXX");
+    strlcpy(tn + len - 6, "XXXXXX");
     ptr = mktemp(tn);
     if (ptr == nullptr || *ptr == '\0') {
       return nullptr;
@@ -57,7 +57,7 @@ int mkstemp(char* tn) {
   auto len = strlen(tn);
   int ret = 0;
   do {
-    strcpy(tn + len - 6, "XXXXXX");
+    strlcpy(tn + len - 6, "XXXXXX");
     ptr = mktemp(tn);
     if (ptr == nullptr || *ptr == '\0') {
       return -1;
